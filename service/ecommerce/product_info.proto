@@ -3,7 +3,8 @@ package ecommerce;
 
 service ProductInfo { 
     rpc addProduct(Product) returns (ProductID); 
-    rpc getProduct(ProductID) returns (Product); 
+    rpc getProduct(ProductID) returns (Product);
+    rpc getOrder(OrderID) returns (Order); 
 }
 
 message Product { 
@@ -14,4 +15,16 @@ message Product {
 
 message ProductID { 
     string value = 1;
+}
+
+message Order { 
+    string id = 1;
+    repeated string items = 2; 
+    string description = 3;
+    string price = 4;
+    string destination = 5;
+}
+
+message OrderID {
+    string id = 1;
 }

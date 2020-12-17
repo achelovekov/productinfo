@@ -20,7 +20,16 @@ func main() {
 	}
 
 	s := grpc.NewServer()
-	pb.RegisterProductInfoServer(s, &server{})
+
+	orderMapVal := make(map[string]*pb.Order)
+
+	orderMapVal["id1"] = &pb.Order{Id: "1", Items: []string{"apple"}, Description: "decr1", Price: "145.000", Destination: "MOSCKOW"}
+	orderMapVal["id2"] = &pb.Order{Id: "2", Items: []string{"SAMsumg"}, Description: "decr2", Price: "146.000", Destination: "london"}
+
+	srv := &server{
+		orderMap: orderMapVal,
+	}
+	pb.RegisterProductInfoServer(s, srv)
 
 	log.Printf("Starting gRPC listener on port " + port)
 	if err := s.Serve(lis); err != nil {

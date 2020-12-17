@@ -46,4 +46,7 @@ func main() {
 
 	log.Printf("Product: ", product.String())
 
+	retrievedOrder, err := c.GetOrder(ctx, &pb.OrderID{Id: "id1"})
+	log.Print("GetOrder Response -> : ", retrievedOrder)
+
 }

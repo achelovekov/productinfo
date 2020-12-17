@@ -15,7 +15,13 @@ import (
 //server abstraction
 type server struct {
 	productMap map[string]*pb.Product
+	orderMap   map[string]*pb.Order
 	ecommerce.UnimplementedProductInfoServer
+}
+
+func (s *server) GetOrder(ctx context.Context, orderID *pb.OrderID) (*pb.Order, error) {
+	ord := s.orderMap[orderID.Id]
+	return ord, nil
 }
 
 func (s *server) AddProduct(ctx context.Context, in *pb.Product) (*pb.ProductID, error) {
